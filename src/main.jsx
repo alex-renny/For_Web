@@ -37,6 +37,7 @@ const memories = [
     song: 'song_2.mp3',
     note:
       'A small fight, a little compromise, food, photos, calls, and care. That day made the bond feel warmer and stronger.',
+      featured: true,
   },
   {
     title: 'Gleam',
@@ -55,7 +56,7 @@ const memories = [
     song: 'song_4.mp3',
     note:
       'The proposal day. The moment love became real, spoken, and unforgettable. April 11, 2025 will always be the date our story turned into forever.',
-    featured: true,
+    
   },
   {
     title: 'Lumen',
