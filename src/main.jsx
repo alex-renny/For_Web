@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Eye, EyeOff } from "lucide-react";
 import {
   CalendarHeart,
   ChevronLeft,
@@ -125,6 +126,19 @@ function App() {
     };
   }, [showPopup]);
 
+  const PASSWORD = "april11🦢"; // password
+const [showPassword, setShowPassword] = useState(false);
+const [password, setPassword] = useState("");
+const [error, setError] = useState("");
+const checkPassword = () => {
+  if (password === PASSWORD) {
+    setShowPopup(false);
+    setError("");
+  } else {
+    setError("Password um maranoo kochuseee 😂");
+  }
+};
+
   const [active, setActive] = useState(3);
   const [playing, setPlaying] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -194,16 +208,35 @@ function App() {
                     ehhhhhhhh oru kochine pole olla aaa talk um aaa nadathavum ella oru kujine pole nalla rasavaaa That's make you special. <br />Pine kochuuve namude scrapbook ath njan onn modify cheythu kettodaa kochuuu But it's not complete
                     .Njan mathram cheythaa ath complete avulalooo.Without your presence it will be always remain incomplete.Athod eth just oru model allekil blueprint pole kuttiyaa mathi wokeyy Baki namukk onich complete cheyam ennale athin oru prefection kittu .
                     "Our little forever" ath finish cheyanokil niiyum veenam.. <br /><br />
-                    Apooo namuk oru cheriya memeory lekk poyalooo kochunu eth isttapeduvoo enn enik ariyulla ennanelum abiprayam parayanee<br /><br />
+                    Apooo namuk oru cheriya memeory lekk poyalooo kochunu eth isttapeduvoo enn enik ariyulla ennanelum abiprayam parayanee. Pine ethite pw kochute wp privacy pw ahne<br /><br />
                     Same pictures,Same songs,Same captions and words and same MEMORIES.I but the design is new... like you have grown from 19 to 20 😚
                   </p>
                 </div>
 
+                <div className="passwordWrapper">
+                  <input
+                      type={showPassword ? "text" : "password"}
+                      className="popupInput"
+                      placeholder="Enter the secret password ❤️"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                  />
+
+                  <button
+                    type="button"
+                    className="showPasswordBtn"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+              </div>
+
+                {error && <p className="popupError">{error}</p>}
+
                 <button
                   className="popupButton"
-                  onClick={() => setShowPopup(false)}
-                >
-                  Our little Forever ❤️🦢
+                  onClick={checkPassword}
+                  >Our Little Forever ❤️🦢
                 </button>
               </div>
             </div>

@@ -120,6 +120,108 @@ main {
         transform: translateY(0);
     }
 }
+/* Password wrapper */
+.passwordWrapper {
+    position: relative;
+    width: 100%;
+    margin: 20px 0 10px;
+}
+
+/* Password input */
+.popupInput {
+    width: 100%;
+    padding: 15px 95px 15px 18px; /* Extra space for button */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--rose), var(--coral) 42%, var(--gold));
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.popupInput::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.popupInput:focus {
+    border-color: rgba(255, 192, 203, 0.8);
+    box-shadow: 0 0 15px rgba(255, 192, 203, 0.25);
+}
+
+/* Show Password button */
+.showPasswordBtn {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+
+    border: none;
+    outline: none;
+
+    background: rgba(221, 4, 4, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+
+    padding: 8px 12px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.showPasswordBtn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.showPasswordBtn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* Error message */
+.popupError {
+    margin-top: 8px;
+    margin-bottom: 18px;
+    color: #ff7676;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.showPasswordBtn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.showPasswordBtn:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+}
 
 .hero {
   position: relative;
