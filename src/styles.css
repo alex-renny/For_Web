@@ -59,7 +59,7 @@ main {
     align-items: center;
 
     background: rgba(0, 0, 0, 0.15); /* Very transparent */
-    backdrop-filter: blur(25px);
+    backdrop-filter: blur(26px);
     -webkit-backdrop-filter: blur(12px);
     
 }
