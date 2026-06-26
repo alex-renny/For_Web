@@ -56,11 +56,13 @@ main {
     width: 100vw;
     height: 100vh;
 
-    background: rgba(255,255,255,.1);
-
+    /* Fix: Increase background opacity for better cross-browser support */
+    background: rgba(0, 0, 0, 0.3);
+    
+    /* Fix: Add multiple backdrop-filter declarations for better browser support */
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-
+    
     z-index: 999999;
 
     display: flex;
