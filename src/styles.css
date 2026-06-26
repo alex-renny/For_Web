@@ -52,24 +52,29 @@ main {
 .popupOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.88);
-    backdrop-filter: blur(10px);
+    z-index: 99999;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
     padding: 20px;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .popupBox {
     max-width: 550px;
-    width: 100%;
+    width: min(100%, 550px);
+    max-height: min(90vh, 760px);
+    overflow-y: auto;
     background: #fff;
     border-radius: 20px;
     padding: 35px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,.3);
     animation: popupFade .5s ease;
+    overscroll-behavior: contain;
 }
 
 .popupBox h2 {

@@ -117,7 +117,12 @@ function App() {
   const [showPopup, setShowPopup] = useState(true);
 
   useEffect(() => {
-    document.body.style.overflow = showPopup ? "hidden" : "auto";
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = showPopup ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
   }, [showPopup]);
 
   const [active, setActive] = useState(3);
@@ -189,7 +194,7 @@ function App() {
                     ehhhhhhhh oru kochine pole olla aaa talk um aaa nadathavum ella oru kujine pole nalla rasavaaa That's make you special. <br />Pine kochuuve namude scrapbook ath njan onn modify cheythu kettodaa kochuuu But it's not complete
                     .Njan mathram cheythaa ath complete avulalooo.Without your presence it will be always remain incomplete.Athod eth just oru model allekil blueprint pole kuttiyaa mathi wokeyy Baki namukk onich complete cheyam ennale athin oru prefection kittu .
                     "Our little forever" ath finish cheyanokil niiyum veenam.. <br /><br />
-                    Apooo namuk oru cheriya memeory lekk poyalooo kochunu eth isttapeduvoo enn enik ariyulla ennanelum abiprayam parayanee<br />
+                    Apooo namuk oru cheriya memeory lekk poyalooo kochunu eth isttapeduvoo enn enik ariyulla ennanelum abiprayam parayanee<br /><br />
                     Same pictures,Same songs,Same captions and words and same MEMORIES.I but the design is new... like you have grown from 19 to 20 😚
                   </p>
                 </div>
