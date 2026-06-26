@@ -1,0 +1,357 @@
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import {
+  CalendarHeart,
+  ChevronLeft,
+  ChevronRight,
+  Gem,
+  Heart,
+  Infinity,
+  Music2,
+  Pause,
+  Play,
+  Quote,
+  Sparkles,
+  Volume2,
+} from 'lucide-react';
+import './styles.css';
+
+const asset = (name) => `/audios/${name}`;
+
+const memories = [
+  {
+    title: 'Dawn',
+    kicker: 'A trip to remember',
+    date: 'February 26, 2025',
+    image: 'us_1.png',
+    song: 'song_1.mp3',
+    note:
+      'Our first trip together became the start of us. The first handhold, the first photo, the quiet smiles, and the feeling that something beautiful had begun.',
+  },
+  {
+    title: 'Bloom',
+    kicker: 'Chaos and closeness',
+    date: 'Ethnic Day',
+    image: 'us_8_png.jpg',
+    song: 'song_2.mp3',
+    note:
+      'A small fight, a little compromise, food, photos, calls, and care. That day made the bond feel warmer and stronger.',
+  },
+  {
+    title: 'Gleam',
+    kicker: 'All about you',
+    date: 'March 29, 2025',
+    image: 'us_11.png',
+    song: 'song_3.mp3',
+    note:
+      'Your birthday was simple and sweet: flowers, a tiny Bible keychain, nervous hands, and a smile that made the whole day glow.',
+  },
+  {
+    title: 'Wander',
+    kicker: 'The beginning of us',
+    date: 'April 11, 2025',
+    image: 'us_5.png',
+    song: 'song_4.mp3',
+    note:
+      'The proposal day. The moment love became real, spoken, and unforgettable. April 11, 2025 will always be the date our story turned into forever.',
+    featured: true,
+  },
+  {
+    title: 'Lumen',
+    kicker: 'Perfectly imperfect',
+    date: 'Our everyday bond',
+    image: 'us_12.png',
+    song: 'song_5.mp3',
+    note:
+      'We laugh, share secrets, miss each other, argue sometimes, and still choose each other. That is the beauty of what we have.',
+  },
+  {
+    title: 'Haven',
+    kicker: 'A simple moment',
+    date: 'A day near home',
+    image: 'us_14.png',
+    song: 'song_7.mp3',
+    note:
+      'The scooter ride, the church, the candle, the bus seat, your head on my shoulder, and the feeling of not wanting the day to end.',
+  },
+  {
+    title: 'Ethereal',
+    kicker: 'Dreamy connection',
+    date: 'My love letter',
+    image: 'us_16.png',
+    song: 'us_10.mp3',
+    note:
+      'You are my comfort, my calm, my favorite thought, and the safest place my heart knows how to return to.',
+  },
+  {
+    title: 'Serene',
+    kicker: 'Forever us',
+    date: 'Always',
+    image: 'us_13.png',
+    song: 'song_6.mp3',
+    note:
+      'I do not need perfect days. I just need us choosing each other with soft hearts, honest love, and hands that never let go.',
+  },
+];
+
+const gallery = ['us_1.png', 'us_5.png', 'us_8_png.jpg', 'us_11.png', 'us_12.png', 'us_13.png', 'us_14.png', 'us_16.png','us_17.png','us_18.png','us_19.png','us_20.png','us_21.png','us_22.png','us_23.png','us_24.png','us_25.png',];
+
+const promises = [
+  'Soft patience',
+  'Honest words',
+  'Little prayers',
+  'Loud laughter',
+  'Always us',
+];
+
+const floatingPhotos = ['us_1.png', 'us_12.png', 'us_11.png', 'us_16.png'];
+
+function daysSinceProposal() {
+  const start = new Date('2025-04-11T00:00:00');
+  const today = new Date();
+  const diff = today.setHours(0, 0, 0, 0) - start.getTime();
+  return Math.max(0, Math.floor(diff / 86400000));
+}
+
+function App() {
+  const [showPopup, setShowPopup] = useState(true);
+
+  useEffect(() => {
+    document.body.style.overflow = showPopup ? "hidden" : "auto";
+  }, [showPopup]);
+
+  const [active, setActive] = useState(3);
+  const [playing, setPlaying] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const audioRef = useRef(null);
+  const selected = memories[active];
+  const proposalDays = useMemo(daysSinceProposal, []);
+
+  const handleHeroMove = (event) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 14;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -14;
+    setTilt({ x, y });
+  };
+
+  const playMemory = async (index = active) => {
+    setActive(index);
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.src = asset(memories[index].song);
+    audio.currentTime = 0;
+    try {
+      await audio.play();
+      setPlaying(true);
+    } catch {
+      setPlaying(false);
+    }
+  };
+
+  const toggleAudio = async () => {
+  const audio = audioRef.current;
+  if (!audio) return;
+
+  if (playing) {
+    audio.pause();
+    setPlaying(false);
+    return;
+  }
+
+  audio.src = "/audios/song_8.mp3"; // your audio file
+  await audio.play();
+  setPlaying(true);
+};
+
+  const shiftMemory = (direction) => {
+    const next = (active + direction + memories.length) % memories.length;
+    playMemory(next);
+  };
+
+  return (
+    <main>
+      <audio ref={audioRef} loop onEnded={() => setPlaying(false)} />
+                  {showPopup && (
+            <div className="popupOverlay">
+              <div className="popupBox">
+                <h2>💖 Before You Enter</h2>
+
+                <p>
+                  Welcome to our little world.
+                </p>
+
+                <div className="popupInstructions">
+                  <p>❤️ This website is best viewed on a desktop or in landscape mode.</p>
+                  <p>🎵 Turn on your sound for the best experience.</p>
+                  <p>✨ Click the Play Music button when you enter.</p>
+                  <p>📸 Scroll slowly and enjoy every memory.</p>
+                </div>
+
+                <button
+                  className="popupButton"
+                  onClick={() => setShowPopup(false)}
+                >
+                  Enter Our Story ❤️
+                </button>
+              </div>
+            </div>
+          )}
+           {!showPopup && (
+              <>
+        
+
+      <section
+        className="hero"
+        aria-label="Our love story"
+        onMouseMove={handleHeroMove}
+        onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+        style={{ '--tilt-x': `${tilt.x}deg`, '--tilt-y': `${tilt.y}deg` }}
+        >
+        <div className="heroImage" />
+        <div className="auroraLayer" aria-hidden="true" />
+        <div className="heartParticles" aria-hidden="true">
+          {Array.from({ length: 16 }).map((_, index) => (
+            <span key={index} />
+          ))}
+        </div>
+        <nav className="topbar" aria-label="Main navigation">
+          <a href="#memories">Memories</a>
+          <a href="#proposal">Proposal</a>
+          <a href="#gallery">Gallery</a>
+        </nav>
+        <div className="heroContent">
+          <p className="eyebrow"><Sparkles size={16} /> A private little universe</p>
+          <h1>Our Little Forever</h1>
+          <p className="heroCopy">
+            A scrapbook for the soft moments, the silly fights, the firsts, and the love that started shining brighter on April 11, 2025.
+          </p>
+          <div className="heroActions">
+            <a className="primaryButton" href="#proposal">
+              <CalendarHeart size={18} /> Proposal day
+            </a>
+            <button className="ghostButton" type="button" onClick={toggleAudio}>
+              {playing ? <Pause size={18} /> : <Play size={18} />} {playing ? 'Pause music' : 'Play music'}
+            </button>
+          </div>
+        </div>
+
+          <div className="heroConstellation" aria-hidden="true">
+            {floatingPhotos.map((photo, index) => (
+              <figure className={`floatPhoto floatPhoto${index + 1}`} key={photo}>
+                <img src={asset(photo)} alt="" />
+              </figure>
+            ))}
+          </div>
+      </section>
+
+      <section className="proposalBand" id="proposal">
+        <div>
+          <p className="eyebrow"><Gem size={16} /> The date everything changed</p>
+          <h2>April 11, 2025</h2>
+          <p>
+            That day was not just a confession. It was the moment two hearts chose the same direction, with nervous smiles, honest words, and a promise hidden inside every glance.
+          </p>
+          <div className="promiseRow" aria-label="Promises">
+            {promises.map((promise) => (
+              <span key={promise}>{promise}</span>
+            ))}
+          </div>
+        </div>
+        <div className="dateCard" aria-label={`${proposalDays} days since proposal`}>
+          <Infinity size={34} />
+          <span>{proposalDays}</span>
+          <small>days of choosing us</small>
+        </div>
+      </section>
+
+      <section className="memorySection" id="memories">
+        <div className="sectionIntro">
+          <p className="eyebrow"><Music2 size={16} /> Tap a chapter to change the song</p>
+          <h2>Memory Chapters</h2>
+        </div>
+
+        <div className="memoryShowcase">
+          <button className="roundButton" type="button" onClick={() => shiftMemory(-1)} aria-label="Previous memory">
+            <ChevronLeft size={22} />
+          </button>
+
+          <article className="memoryPanel">
+            <div className="memoryPhotoWrap">
+              <img src={asset(selected.image)} alt={`${selected.title} memory`} />
+              <div className="vinylDisc" aria-hidden="true">
+                <span />
+              </div>
+            </div>
+            <div className="memoryText">
+              <span>{selected.date}</span>
+              <h3>{selected.title}</h3>
+              <p className="kickerText">{selected.kicker}</p>
+              <p>{selected.note}</p>
+              <div className="memoryControls">
+                <button className="primaryButton compact" type="button" onClick={() => playMemory(active)}>
+                  <Volume2 size={17} /> Play this chapter
+                </button>
+                <span className="nowPlaying">{playing ? 'Music is glowing' : 'Ready to play'}</span>
+              </div>
+            </div>
+          </article>
+
+          <button className="roundButton" type="button" onClick={() => shiftMemory(1)} aria-label="Next memory">
+            <ChevronRight size={22} />
+          </button>
+        </div>
+
+        <div className="chapterRail" aria-label="Memory chapter list">
+          {memories.map((memory, index) => (
+            <button
+              className={index === active ? 'chapter activeChapter' : 'chapter'}
+              type="button"
+              key={memory.title}
+              onClick={() => playMemory(index)}
+            >
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              {memory.title}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="letterSection">
+        <div className="letter">
+          <p className="eyebrow"><Quote size={16} /> For Chekkoo</p>
+          <h2>You make ordinary days feel rare.</h2>
+          <p>
+            Love is the comfort of your voice, the sparkle in your eyes, and the peace I find when I am with you. Even silence feels meaningful when it is shared with you.
+          </p>
+          <p>
+            I love how we keep coming back to each other with more care, more patience, and more reasons to believe in us.
+          </p>
+        </div>
+        <img src={asset('us_14.png')} alt="A soft black and white memory together" />
+      </section>
+
+      <section className="gallerySection" id="gallery">
+        <div className="sectionIntro">
+          <p className="eyebrow"><Sparkles size={16} /> Photo wall</p>
+          <h2>Our Favorite Frames</h2>
+        </div>
+        <div className="galleryGrid">
+          {gallery.map((photo, index) => (
+            <figure key={photo} className={`galleryItem item${index + 1}`}>
+              <img src={asset(photo)} alt={`Couple memory ${index + 1}`} />
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <footer>
+        <Heart size={18} />
+        <span>Always yours. April 11, 2025 and every day after.</span>
+      </footer>
+      </>
+    )}
+    </main>
+  );
+}
+
+createRoot(document.getElementById('root')).render(<App />);
