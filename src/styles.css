@@ -51,17 +51,21 @@ main {
 }
 .popupOverlay {
     position: fixed;
-    inset: 0;
-    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(255,255,255,.1);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    z-index: 999999;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background: rgba(0, 0, 0, 0.15); /* Very transparent */
-    backdrop-filter: blur(26px);
-    -webkit-backdrop-filter: blur(12px);
-    
 }
 
 .popupBox {
