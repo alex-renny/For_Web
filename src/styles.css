@@ -51,23 +51,22 @@ main {
 }
 .popupOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
 
-    /* Fix: Increase background opacity for better cross-browser support */
-    background: rgba(0, 0, 0, 0.3);
-    
-    /* Fix: Add multiple backdrop-filter declarations for better browser support */
-    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(15px);
-    
+
     z-index: 999999;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    /* 🔥 IMPORTANT FIX */
+    transform: translateZ(0);
+    will-change: backdrop-filter;
 }
 
 .popupBox {
