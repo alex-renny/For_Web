@@ -75,6 +75,7 @@ main {
 .popupBox h2 {
     margin-bottom: 15px;
     color: #ff4f8b;
+    font-size: 250%;
 }
 
 .popupInstructions {

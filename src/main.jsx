@@ -174,24 +174,31 @@ function App() {
                   {showPopup && (
             <div className="popupOverlay">
               <div className="popupBox">
-                <h2>💖 Before You Enter</h2>
+                <h2>Happy Birthday Jaada Kari 🦢</h2>
 
                 <p>
-                  Welcome to our little world.
+                  Welcome to our little Forever.
                 </p>
 
                 <div className="popupInstructions">
-                  <p>❤️ This website is best viewed on a desktop or in landscape mode.</p>
-                  <p>🎵 Turn on your sound for the best experience.</p>
-                  <p>✨ Click the Play Music button when you enter.</p>
-                  <p>📸 Scroll slowly and enjoy every memory.</p>
+                  <p>Edii Jaada Kari penne Happy Birthday😚. First off all Enikk nine pole parayan ariyulla okee🫷 athod adjust cheyanam.Ente kochunu 20 vayass ayelleee valarnn poyi ente vavaa🥹.
+                    Agne nii ente penn ayett eth kochute 2nd B'day.Ohh My God enikk enna parayadenu ariyula😅 enna pannuvee.....<br/>Nii choyecha pole enikk sothayett onum ondaki tharan ariyulla kochuuu enik nine pole craft il kaziv ella I'm weak in craft athod ente kochine enikk ariyavuna karyathil oru gift tharanu vechuu 😁.Pinalla njan oru sambavam thane 😎.
+                    Ayenn munp kochuseee , edii penne Enikk kochune othiri othiri isttavaa ariyoo ninak 🤨 pakshee ath agane purathod varulla ennanoo avoo enik aa shneham egana kanikeede enn chilapoo ariyullaa athann vesheyam.Chilapoo ath ente moodoff avam chilapoo kochute reation um tone um karanam avan agane kuree prblms. Apooo nii parayam "ninak enne isttam alla enn"
+                    Njan enna cheyana..😅.But do you know something arodum parayalum secret aa "I LOVE YOU". Ath anum enneum epoozum agane thane avum kettaloooo.Nii ellathe pattulaneee enna cheyan Nii 
+                    ollapoo oru pretheka feel aa ath pakuthi time um namel adi ahnelum. Pakuthi alla 80% um adiyaa ennaum olla 20% ath mathi.Ente kochute chila time le cute face kanam enna resanu ariyoo dii penne 
+                    ehhhhhhhh oru kochine pole olla aaa talk um aaa nadathavum ella oru kujine pole nalla rasavaaa That's make you special. <br />Pine kochuuve namude scrapbook ath njan onn modify cheythu kettodaa kochuuu But it's not complete
+                    .Njan mathram cheythaa ath complete avulalooo.Without your presence it will be always remain incomplete.Athod eth just oru model allekil blueprint pole kuttiyaa mathi wokeyy Baki namukk onich complete cheyam ennale athin oru prefection kittu .
+                    "Our little forever" ath finish cheyanokil niiyum veenam.. <br /><br />
+                    Apooo namuk oru cheriya memeory lekk poyalooo kochunu eth isttapeduvoo enn enik ariyulla ennanelum abiprayam parayanee<br />
+                    Same pictures,Same songs,Same captions and words and same MEMORIES.I but the design is new... like you have grown from 19 to 20 😚
+                  </p>
                 </div>
 
                 <button
                   className="popupButton"
                   onClick={() => setShowPopup(false)}
                 >
-                  Enter Our Story ❤️
+                  Our little Forever ❤️🦢
                 </button>
               </div>
             </div>
