@@ -208,8 +208,8 @@ function App() {
               </div>
             </div>
           )}
-           {!showPopup && (
-              <>
+           {/* {!showPopup && (
+              <> */}
         
 
       <section
@@ -360,8 +360,8 @@ function App() {
         <Heart size={18} />
         <span>Always yours. April 11, 2025 and every day after.</span>
       </footer>
-      </>
-    )}
+      {/* </>
+    )} */}
     </main>
   );
 }
