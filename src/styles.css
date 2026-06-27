@@ -52,24 +52,25 @@ main {
 .popupOverlay {
     position: fixed;
     inset: 0;
-
-    background: rgba(255, 255, 255, 0.08);
-
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(15px);
-
     z-index: 999999;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    isolation: isolate;
+}
 
-    /* 🔥 IMPORTANT FIX */
-    transform: translateZ(0);
-    will-change: backdrop-filter;
+.popupOverlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    pointer-events: none;
 }
 
 .popupBox {
+
     max-width: 550px;
     width: min(100%, 550px);
     max-height: min(90vh, 760px);
