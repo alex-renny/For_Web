@@ -124,6 +124,54 @@ function daysSinceProposal() {
 
 
 function App() {
+
+  // Add this JavaScript to create floating hearts
+const createHearts = () => {
+    const overlay = document.querySelector('.popupOverlay');
+    if (!overlay) return;
+
+    const heartEmojis = ['❤️', '💕', '🦢', '💖', '💝', '💘', '🩷', '🦢', '🤍'];
+    
+    const createHeart = () => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        
+        // Random properties
+        const size = Math.random() * 20 + 15; // 15-35px
+        const left = Math.random() * 100; // 0-100%
+        const duration = Math.random() * 3 + 4; // 4-7 seconds
+        const delay = Math.random() * 2; // 0-2 seconds
+        
+        heart.style.cssText = `
+            left: ${left}%;
+            font-size: ${size}px;
+            animation-duration: ${duration}s;
+            animation-delay: ${delay}s;
+        `;
+        
+        overlay.appendChild(heart);
+        
+        // Remove heart after animation
+        setTimeout(() => {
+            heart.remove();
+        }, (duration + delay) * 1000);
+    };
+    
+    // Create hearts at intervals
+    setInterval(createHeart, 300);
+};
+
+// Initialize hearts when popup is shown
+const initializeHearts = () => {
+    if (document.querySelector('.popupOverlay')) {
+        createHearts();
+    }
+};
+
+// Call this function when your popup appears
+// You can add it to your showPopup logic or useEffect
+
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [showPopup, setShowPopup] = useState(true);
 
@@ -131,10 +179,20 @@ function App() {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = showPopup ? "hidden" : "";
 
+    let heartInterval;
+
+    if (showPopup) {
+        heartInterval = createHearts();
+    }
+
     return () => {
-      document.body.style.overflow = previousOverflow;
+        document.body.style.overflow = previousOverflow;
+
+        if (heartInterval) {
+            clearInterval(heartInterval);
+        }
     };
-  }, [showPopup]);
+}, [showPopup]);
 
   const PASSWORD = "april11🦢"; // password
 const [showPassword, setShowPassword] = useState(false);

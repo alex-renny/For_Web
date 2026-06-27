@@ -67,10 +67,62 @@ main {
     /* 🔥 IMPORTANT FIX */
     transform: translateZ(0);
     will-change: backdrop-filter;
+
+    /* Animated background */
+    overflow: hidden;
+}
+
+/* Animated hearts container */
+.popupOverlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 79, 139, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 154, 139, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, rgba(255, 79, 139, 0.1) 0%, transparent 50%);
+    animation: gradientShift 8s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    bottom: -50px;
+    pointer-events: none;
+    user-select: none;
+    animation: floatHeart linear forwards;
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 .popupBox {
-
     max-width: 550px;
     width: min(100%, 550px);
     max-height: min(90vh, 760px);
@@ -82,6 +134,8 @@ main {
     box-shadow: 0 20px 60px rgba(0,0,0,.3);
     animation: popupFade .5s ease;
     overscroll-behavior: contain;
+    position: relative;
+    z-index: 1;
 }
 
 .popupBox h2 {
@@ -121,6 +175,7 @@ main {
         transform: translateY(0);
     }
 }
+
 /* Password wrapper */
 .passwordWrapper {
     position: relative;
@@ -131,7 +186,7 @@ main {
 /* Password input */
 .popupInput {
     width: 100%;
-    padding: 15px 95px 15px 18px; /* Extra space for button */
+    padding: 15px 95px 15px 18px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 15px;
     outline: none;
@@ -154,49 +209,6 @@ main {
 }
 
 /* Show Password button */
-.showPasswordBtn {
-    position: absolute;
-    top: 50%;
-    right: 8px;
-    transform: translateY(-50%);
-
-    border: none;
-    outline: none;
-
-    background: rgba(221, 4, 4, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-
-    padding: 8px 12px;
-    border-radius: 10px;
-
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.showPasswordBtn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-50%) scale(1.05);
-}
-
-.showPasswordBtn:active {
-    transform: translateY(-50%) scale(0.95);
-}
-
-/* Error message */
-.popupError {
-    margin-top: 8px;
-    margin-bottom: 18px;
-    color: #ff7676;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: left;
-}
-
 .showPasswordBtn {
     position: absolute;
     top: 50%;
@@ -224,6 +236,15 @@ main {
     color: #fff;
 }
 
+/* Error message */
+.popupError {
+    margin-top: 8px;
+    margin-bottom: 18px;
+    color: #ff7676;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+}
 .hero {
   position: relative;
   min-height: 96vh;
