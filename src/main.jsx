@@ -115,7 +115,16 @@ function daysSinceProposal() {
   return Math.max(0, Math.floor(diff / 86400000));
 }
 
+// Add this state near your other useState declarations at the top of App component:
+
+// Add this function to handle photo click:
+
+
+// Add this function to handle photo download:
+
+
 function App() {
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [showPopup, setShowPopup] = useState(true);
 
   useEffect(() => {
@@ -187,6 +196,27 @@ const checkPassword = () => {
     const next = (active + direction + memories.length) % memories.length;
     playMemory(next);
   };
+
+  const openPhotoViewer = (photoSrc) => {
+  setSelectedPhoto(photoSrc);
+};
+const downloadPhoto = async (photoSrc, photoName) => {
+  try {
+    const response = await fetch(photoSrc);
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = photoName || 'memory.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    // Fallback: open in new tab if download fails
+    window.open(photoSrc, '_blank');
+  }
+};
 
   return (
     <main>
@@ -376,6 +406,7 @@ const checkPassword = () => {
         <img src={asset('us_14.png')} alt="A soft black and white memory together" />
       </section>
 
+
       <section className="gallerySection" id="gallery">
         <div className="sectionIntro">
           <p className="eyebrow"><Sparkles size={16} /> Photo wall</p>
@@ -384,11 +415,98 @@ const checkPassword = () => {
         <div className="galleryGrid">
           {gallery.map((photo, index) => (
             <figure key={photo} className={`galleryItem item${index + 1}`}>
-              <img src={asset(photo)} alt={`Couple memory ${index + 1}`} />
+              <img 
+                src={asset(photo)} 
+                alt={`Couple memory ${index + 1}`}
+                onClick={() => openPhotoViewer(asset(photo))}
+                style={{ cursor: 'pointer' }}
+              />
+              <div className="galleryItemOverlay">
+                <button 
+                  className="viewButton"
+                  onClick={() => openPhotoViewer(asset(photo))}
+                  aria-label="View photo"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </button>
+                <button 
+                  className="downloadButton"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    downloadPhoto(asset(photo), `memory_${index + 1}.jpg`);
+                  }}
+                  aria-label="Download photo"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                </button>
+              </div>
             </figure>
           ))}
         </div>
+        <div className="galleryActions">
+          <button 
+            className="ghostButton galleryToggle" 
+            type="button"
+            onClick={() => {
+              const grid = document.querySelector('.galleryGrid');
+              grid.classList.toggle('showAll');
+              const btn = document.querySelector('.galleryToggle');
+              if (grid.classList.contains('showAll')) {
+                btn.textContent = 'See Less ✨';
+              } else {
+                btn.textContent = 'See More 💕';
+              }
+            }}
+          >
+            See More 💕
+          </button>
+        </div>
       </section>
+
+      {/* Photo Viewer Modal */}
+      {selectedPhoto && (
+        <div className="photoViewerOverlay" onClick={() => setSelectedPhoto(null)}>
+          <div className="photoViewerContent" onClick={(e) => e.stopPropagation()}>
+            <div className="photoViewerHeader">
+              <button 
+                className="photoViewerDownload"
+                onClick={() => downloadPhoto(selectedPhoto, 'memory_download.jpg')}
+                aria-label="Download photo"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <span>Download</span>
+              </button>
+              <button 
+                className="photoViewerClose"
+                onClick={() => setSelectedPhoto(null)}
+                aria-label="Close viewer"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <img 
+              src={selectedPhoto} 
+              alt="Memory" 
+              className="photoViewerImage"
+            />
+          </div>
+        </div>
+      )}
+
 
       <footer>
         <Heart size={18} />
