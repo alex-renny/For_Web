@@ -162,7 +162,7 @@ main {
 }
 
 .popupButton:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 @keyframes popupFade {
@@ -244,6 +244,20 @@ main {
     font-size: 14px;
     font-weight: 600;
     text-align: left;
+}
+.buttonLogo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.popupButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 .hero {
   position: relative;

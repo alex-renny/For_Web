@@ -325,7 +325,13 @@ const downloadPhoto = async (photoSrc, photoName) => {
                 <button
                   className="popupButton"
                   onClick={checkPassword}
-                  >Our Little Forever ❤️🦢
+                >
+                  Our Little Forever
+                  <img
+                    src="/audios/logo.png"
+                    alt="Logo"
+                    className="buttonLogo"
+                  />
                 </button>
               </div>
             </div>
