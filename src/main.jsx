@@ -272,8 +272,8 @@ const downloadPhoto = async (photoSrc, photoName) => {
               </div>
             </div>
           )}
-           {/* {!showPopup && (
-              <> */}
+           {!showPopup && (
+              <>
         
 
       <section
@@ -512,8 +512,8 @@ const downloadPhoto = async (photoSrc, photoName) => {
         <Heart size={18} />
         <span>Always yours. April 11, 2025 and every day after.</span>
       </footer>
-      {/* </>
-    )} */}
+      </>
+    )}
     </main>
   );
 }
