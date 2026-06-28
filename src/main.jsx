@@ -96,7 +96,7 @@ const memories = [
   },
 ];
 
-const gallery = ['us_1.png', 'us_5.png', 'us_8_png.jpg', 'us_11.png', 'us_12.png', 'us_13.png', 'us_14.png', 'us_16.png','us_17.png','us_18.png','us_19.png','us_20.png','us_21.png','us_22.png','us_23.png','us_24.png','us_25.png',];
+const gallery = ['us_1.png', 'us_5.png', 'us_8_png.jpg', 'us_11.png', 'us_12.png', 'us_13.png', 'us_14.png', 'us_16.png','us_17.png','us_18.png','us_19.png','us_20.png','us_21.png','us_22.png','us_23.png','us_24.png','us_25.png','us_26.png',];
 
 const promises = [
   'Soft patience',
