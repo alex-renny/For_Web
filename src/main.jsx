@@ -106,7 +106,7 @@ const promises = [
   'Always us',
 ];
 
-const floatingPhotos = ['us_1.png', 'us_12.png', 'us_11.png', 'us_16.png'];
+const floatingPhotos = ['us_1.png', 'us_20.png', 'us_8_png.jpg', 'us_21.png'];
 
 function daysSinceProposal() {
   const start = new Date('2025-04-11T00:00:00');
